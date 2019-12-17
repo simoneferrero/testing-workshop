@@ -20,11 +20,19 @@
 		"start": "PORT=3001 react-scripts start",
 		"build": "react-scripts build",
 		"format": "prettier --write",
-		"test": "react-scripts test",
+		"test": "react-scripts test --coverage",
 		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
-		"extends": "react-app"
+		"extends": "react-app",
+		"env": {
+			"browser": true
+		},
+		"globals": {
+			"React": true,
+			"render": true,
+			"userEvent": true
+		}
 	},
 	"browserslist": {
 		"production": [

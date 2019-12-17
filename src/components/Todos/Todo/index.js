@@ -27,7 +27,11 @@ const StyledTodo = styled.button`
 `
 
 const Todo = ({ completed, handleClick, id, text }) => (
-	<StyledTodo completed={completed} onClick={() => handleClick(id, !completed)}>
+	<StyledTodo
+		completed={completed}
+		data-testid={`todo-${id}`}
+		onClick={() => handleClick(id, !completed)}
+	>
 		{text}
 	</StyledTodo>
 )

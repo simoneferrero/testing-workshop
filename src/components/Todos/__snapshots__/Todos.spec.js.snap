@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given <Todos /> should render correctly 1`] = `
+<div
+  class="styled__StyledWrapper-p9f9rb-0 dzSefC"
+  data-testid="todos"
+>
+  <form
+    class="sc-bdVaJa blTatB"
+  >
+    <input
+      class="sc-bwzfXH flCDJS"
+      placeholder="Add TODO"
+      value=""
+    />
+    <button
+      class="sc-htpNat cbrJpO"
+      type="submit"
+    >
+      ADD
+    </button>
+  </form>
+  <label
+    class="styled__StyledLabel-p9f9rb-1 iwEyoC"
+    for="showCompleted"
+  >
+    Show Completed:
+     
+    <input
+      checked=""
+      id="showCompleted"
+      type="checkbox"
+    />
+  </label>
+  <div
+    class="styled__StyledPaper-p9f9rb-2 hlILHM"
+    data-testid="paper"
+  />
+</div>
+`;
