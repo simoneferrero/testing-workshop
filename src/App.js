@@ -1,8 +1,9 @@
-import React, { Profiler } from "react";
+import React, { lazy, Profiler, Suspense } from "react";
 import styled from "styled-components/macro";
 
-import Todos from "components/Todos";
 import { SPACING } from "constants/index";
+
+const Todos = lazy(() => import('components/Todos'))
 
 const onRenderCallback = (...args) => {
   if (args.id !== "app") {
@@ -29,12 +30,14 @@ const StyledHeader = styled.header`
 `;
 
 const App = () => (
-  <Profiler id="app" onRender={onRenderCallback}>
+  <Profiler id="app" onRender={ onRenderCallback }>
     <div>
       <StyledHeader>
         <h1>TODO List</h1>
       </StyledHeader>
-      <Todos />
+      <Suspense fallback="Loading...">
+        <Todos />
+      </Suspense>
     </div>
   </Profiler>
 );
