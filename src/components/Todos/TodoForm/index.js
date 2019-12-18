@@ -34,15 +34,18 @@ const TodoForm = ({ handleSubmit }) => {
 	const onSubmit = (event) => {
 		event.preventDefault()
 
-		!!newTodo && handleSubmit(newTodo)
+		if (!!newTodo) {
+			handleSubmit(newTodo)
+			setNewTodo('')
+		}
 	}
 
 	return (
-		<StyledForm onSubmit={onSubmit}>
+		<StyledForm onSubmit={ onSubmit }>
 			<StyledInput
-				onChange={({ target: { value } }) => setNewTodo(value)}
+				onChange={ ({ target: { value } }) => setNewTodo(value) }
 				placeholder="Add TODO"
-				value={newTodo}
+				value={ newTodo }
 			/>
 			<StyledButton type="submit">ADD</StyledButton>
 		</StyledForm>

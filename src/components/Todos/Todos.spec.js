@@ -3,6 +3,7 @@ import { within } from '@testing-library/react'
 import Todos from './index'
 
 describe('Given <Todos />', () => {
+	const todos = ['First todo', 'Second todo']
 	const renderComponent = () => {
 		const renderedComponent = render(<Todos />)
 		const {
@@ -19,7 +20,7 @@ describe('Given <Todos />', () => {
 			getAddTodoInput: () => getByPlaceholderText(/Add TODO/i),
 			getAllTodos: () => getAllByTestId(/(todo-)/i),
 			getShowCompletedCheckbox: () => getByLabelText(/(Show Completed:)/i),
-			getTodo: (text) => within(getByTestId('paper')).getByText(text),
+			getTodo: (text) => within(getByTestId('paper')).queryByText(text),
 			getWrapper: () => getByTestId('todos'),
 		}
 	}
@@ -40,7 +41,6 @@ describe('Given <Todos />', () => {
 	})
 
 	it('should correctly add new todos and mark them complete', () => {
-		const todos = ['First todo', 'Second todo']
 		const {
 			getAllTodos,
 			getAddTodoButton,
@@ -67,5 +67,24 @@ describe('Given <Todos />', () => {
 
 		expect(completedTodo).toHaveStyle('color: #808080;')
 		expect(completedTodo).toHaveStyle('text-decoration: line-through;')
+	})
+
+	it('should correctly hide completed todos', () => {
+		const {
+			getAddTodoButton,
+			getAddTodoInput,
+			getShowCompletedCheckbox,
+			getTodo,
+		} = renderComponent()
+
+		todos.forEach((todo) => {
+			userEvent.type(getAddTodoInput(), todo)
+			userEvent.click(getAddTodoButton())
+		})
+
+		userEvent.click(getTodo(todos[0]))
+		userEvent.click(getShowCompletedCheckbox())
+
+		expect(getTodo(todos[0])).not.toBeInTheDocument()
 	})
 })

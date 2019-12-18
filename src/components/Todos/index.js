@@ -35,7 +35,7 @@ const Todos = () => {
 			</StyledLabel>
 			<StyledPaper data-testid="paper">
 				{ todos.map((todo) => (
-					<Todo handleClick={ handleClick } key={ todo.id } { ...todo } />
+					(showCompleted || !todo.completed) && <Todo handleClick={ handleClick } key={ todo.id } { ...todo } />
 				)) }
 			</StyledPaper>
 		</StyledWrapper>

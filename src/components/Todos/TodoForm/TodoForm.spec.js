@@ -6,7 +6,7 @@ describe('Given <TodoForm />', () => {
 		handleSubmit,
 	}
 	const renderComponent = (props = {}) =>
-		render(<TodoForm {...defaultProps} {...props} />)
+		render(<TodoForm { ...defaultProps } { ...props } />)
 
 	it('should NOT call submit if the input is empty', () => {
 		const { getByText } = renderComponent()
@@ -16,7 +16,7 @@ describe('Given <TodoForm />', () => {
 		expect(handleSubmit).not.toHaveBeenCalled()
 	})
 
-	it('should call submit if the input is NOT empty', () => {
+	it('should call submit and reset the input if the input is NOT empty', () => {
 		const todo = 'Hello world'
 		const { getByPlaceholderText, getByText } = renderComponent()
 
@@ -25,5 +25,6 @@ describe('Given <TodoForm />', () => {
 		userEvent.click(getByText(/ADD/i))
 
 		expect(handleSubmit).toHaveBeenCalledWith(todo)
+		expect(getByPlaceholderText(/Add TODO/i)).toHaveValue('')
 	})
 })
